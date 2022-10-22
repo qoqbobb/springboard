@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="excel">
+    
+    
+  	<resultMap type="com.spring.board.vo.BoardVo" id="boardVo">
+    	<result property="boardType" 	column="BOARD_TYPE"/>
+    	<result property="boardNum" 	column="BOARD_NUM"/>
+    	<result property="boardTitle" 	column="BOARD_TITLE"/>
+    	<result property="boardComment" column="BOARD_COMMENT"/>
+    	<result property="codeName"     column="CODE_NAME"/>
+    
+    </resultMap>
+    
+   
+    
+ <select id="excelList" parameterType="com.spring.board.vo.BoardVo" resultMap="boardVo">
+ 
+	 SELECT 
+		  	BOARD_TYPE
+		  ,b.BOARD_NUM
+		  ,b.BOARD_TITLE
+		  ,b.BOARD_COMMENT
+		  ,b.CREATOR
+          ,b.MODIFIER
+          ,c.CODE_NAME  
+	 FROM board b 
+	 INNER JOIN COM_CODE c
+	 ON BOARD_TYPE = CODE_ID 
+	 ORDER BY BOARD_NUM
+ 
+ </select>
+    
+     
+     
+     
+     
+   
+</mapper>
